@@ -1,7 +1,7 @@
-# wp-snippets
+# WordPress Snippets
 Just a few handy snippets to use for WordPress:
 
-* var_dump with `<pre` tags
+* var_dump with `<pre>` tags
 * Unhide the kitchen sink
 * stop linking images by default
 * view counts
