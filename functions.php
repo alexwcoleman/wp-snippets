@@ -173,3 +173,36 @@ function yourtheme_paging_nav() {
     endif;
 }
 endif;
+
+////////////////////////////
+// ID IN TOP ADMIN BAR
+////////////////////////////
+
+class id_in_menu_bar {
+
+  function __construct( ) {
+    add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 100 );
+  }
+
+  function admin_bar_menu( $wp_admin_bar ) {
+    $wp_admin_bar->add_menu( array(
+      'id'    => 'id',
+      'title' => 'ID:   ' . get_the_id(),
+    ) );
+  }
+}
+
+$display = new id_in_menu_bar();
+
+////////////////////////////
+// remove wp version param from any enqueued scripts
+// from: http://wordpress.stackexchange.com/questions/132282/removing-wordpress-version-number-from-included-files
+////////////////////////////
+
+function vc_remove_wp_ver_css_js( $src ) {
+    if ( strpos( $src, 'ver=' . get_bloginfo( 'version' ) ) )
+        $src = remove_query_arg( 'ver', $src );
+    return $src;
+}
+add_filter( 'style_loader_src', 'vc_remove_wp_ver_css_js', 9999 );
+add_filter( 'script_loader_src', 'vc_remove_wp_ver_css_js', 9999 );
